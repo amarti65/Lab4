@@ -448,11 +448,11 @@ string courseName(int num)
 
 //-------------------------------------------------------------------------------------------------
 //Function maxPerYear: This function will compute and output the class that had the max amount of
-//					   students per year. The function will use a for loop to go through every
-//					   course looking at only the third position in the second column. The years
-//					   will then be examined to determine which course had the most amount of
-//					   students enrolled in. The function will the ouput the year, course name,
-//					   and the amount of students for that course.
+//			students per year. The function will use a for loop to go through every
+//			 course looking at only the third position in the second column. The years
+//			 will then be examined to determine which course had the most amount of
+//			  students enrolled in. The function will the ouput the year, course name,
+//			  and the amount of students for that course.
 //
 //Precondition:		   This function will need the array passed to it so it may read the values
 //					   stored within. It will also need the length of the array passed as well.
@@ -596,7 +596,15 @@ void rangeOfYears(const int list [][3], int numCourses, int& low, int& high)
 	}//end for loop
 }//end rangeOfYears function
 
-
+//-------------------------------------------------------------------------------------------------
+//Function graph: •	A function to create a graph for each course the number of students per 
+// year. The Y axis is the year, the X axis is the number of the students in that course
+//
+//Precondition:			 The function requires access to read the values in the array and the
+//			length of the array, the amount of courses in the array sent to
+//						 it, and the course title.
+//Postcondition:		 This function will output a visual graph to interpret the data.
+//-------------------------------------------------------------------------------------------------
 void graph(const int list[][3],int numOfCourses, int numOfClass,string className)
 {
 
@@ -639,8 +647,13 @@ void graph(const int list[][3],int numOfCourses, int numOfClass,string className
 	cout << "";
 }
 
-//Prints n asterisks to the screen .
-
+//-------------------------------------------------------------------------------------------------
+//Function printAsterisks: • A supporting function called by graph. This function prints our lines
+// 					in rows equal to the value passed in.
+//
+//Precondition:			 This funciton requires an integer value for the length.
+//Postcondition:		 This function will output a tally of asterisks, denoted with "*".
+//-------------------------------------------------------------------------------------------------
 void printAsterisks(int n)
  {
 
