@@ -49,7 +49,7 @@ const string course3 = "ENG105";
 //					of the array.
 //Postcondition:	This function will not be returning anything.
 //-------------------------------------------------------------------------------------------------
-void getData(int list[][3], int& numCourses, int index);
+void getData(int list [][3], int& numCourses, int index);
 
 //-------------------------------------------------------------------------------------------------
 //Function graph: graph will print out the results of each class in a graphical format. The format
@@ -61,7 +61,7 @@ void getData(int list[][3], int& numCourses, int index);
 //				  of the array sent to it to work properly.
 //Postcondition:  This function will not return anything.
 //-------------------------------------------------------------------------------------------------
-void graph(const int list[][3], int numOfCourses, int numOfClass);
+void graph(const int list[][3],int numOfCourses, int numOfClass, string className);
 
 //-------------------------------------------------------------------------------------------------
 //Function rangeOfYears: This function will compute and output the range of years that each class
@@ -72,7 +72,7 @@ void graph(const int list[][3], int numOfCourses, int numOfClass);
 //						 it.
 //Postcondition:		 This function will not output anything.
 //-------------------------------------------------------------------------------------------------
-void rangeOfYears(const int list[][3], int numCourses, int& low, int& high);
+void rangeOfYears(const int list [][3], int numCourses, int& low, int& high);
 
 //-------------------------------------------------------------------------------------------------
 //Function totalPerCourse: The function will comput and output the total number of students per
@@ -109,7 +109,7 @@ void minNumberOfStudents(const int list[][3], int numCourses);
 //					   stored within. It will also need the length of the array passed as well.
 //Postcondition:       This function will not return anything.
 //-------------------------------------------------------------------------------------------------
-void maxPerYear(const int list[][3], int numCourses);
+void maxPerYear(const int list [][3], int numCourses);
 
 //-------------------------------------------------------------------------------------------------
 //Function totalPerCourse: This function will output the total number of students in each course
@@ -141,7 +141,7 @@ void checkRequest(int& numCourses);
 //					courses in the array, and the index all to be passed to it.
 //Postcondition:    This function will not return anything.
 //-------------------------------------------------------------------------------------------------
-void addMore(int list[][3], int numCourses, int index);
+void addMore(int list [][3], int numCourses, int index);
 
 //-------------------------------------------------------------------------------------------------
 //Function convertCourse: This function will compare an entered string and return an int value
@@ -177,7 +177,7 @@ void printMaxYear(int list[][3], int answerIndex);
 
 void printAsterisks(int n);
 
-void totalPerCourse(const int list[][3], int numCourses, int numOfClass);
+void totalPerCourse(const int list[][3], int numCourses,int numOfClass);
 
 //-------------------------------------------------------------------------------------------------
 //Function main: The main function. It will be responsible for running the program and making the
@@ -201,14 +201,14 @@ int main()
 
 	minNumberOfStudents(list, numCourses);
 
-	maxPerYear(list, numCourses);
-
-	graph(list, numCourses, convertCourse(course1));
-	graph(list, numCourses, convertCourse(course2));
-	graph(list, numCourses, convertCourse(course3));
+	graph(list, numCourses,convertCourse(course1), courseName(1));
+	graph(list, numCourses,convertCourse(course2), courseName(2));
+	graph(list, numCourses,convertCourse(course3), courseName(3));
 	totalPerCourse(list, numCourses, convertCourse(course1));
 	totalPerCourse(list, numCourses, convertCourse(course2));
 	totalPerCourse(list, numCourses, convertCourse(course3));
+
+	maxPerYear(list,numCourses);
 
 	int in;
 	cin >> in;
@@ -235,7 +235,7 @@ int main()
 //					of the array.
 //Postcondition:	This function will not be returning anything.
 //-------------------------------------------------------------------------------------------------
-void getData(int list[][3], int& numCourses, int index)
+void getData(int list [][3], int& numCourses, int index)
 {
 	//int = list[][3];
 	//check to see if the amount of courses user wants to enter is possible
@@ -243,8 +243,8 @@ void getData(int list[][3], int& numCourses, int index)
 
 	//prompt
 	cout << "Please enter the course information as follows:\n"
-		<< "Year  Course  # of Students"
-		<< endl;
+		 << "Year  Course  # of Students"
+		 << endl;
 
 	//loop controlling the enter of data in the 2D array. Index will be updated so if more courses
 	//wish to be entered the function will not over-write previously entered data
@@ -299,27 +299,25 @@ void checkRequest(int& numCourses)
 
 	//prompt and show total remaining space in the array
 	cout << "How many courses would you like to add?\n"
-		<< "Note: only "
-		<< MAX_ENTRY - numCourses
-		<< " spaces remain."
-		<< endl;
+		 << "Note: only "
+		 << MAX_ENTRY - numCourses
+		 << " spaces remain."
+		 << endl;
 
-	cin >> numRequest;
+	cin  >> numRequest;
 
 	//check to see if there is room to accomodate the request. If so, then add it. If not, then
 	//ask for a more reasonable number and repeat the function.
 	if (numRequest <= (MAX_ENTRY - numCourses))
 	{
-
 		numCourses += numRequest;
-
 	}//end if statement
 	else
 	{
 
 		cout << "Please enter a number equal to or less than "
-			<< MAX_ENTRY - numCourses
-			<< endl;
+			 << MAX_ENTRY - numCourses
+			 << endl;
 
 		checkRequest(numCourses);
 
@@ -349,10 +347,10 @@ void addMore(int list[][3], int numCourses, int index)
 	{
 
 		cout << "Would you like to add more courses?\n"
-			<< "Note: only "
-			<< MAX_ENTRY - numCourses
-			<< " can be entered. 1 to enter more, 0 to continue to next menu."
-			<< endl;
+			 << "Note: only "
+			 << MAX_ENTRY - numCourses
+			 << " can be entered. 1 to enter more, 0 to continue to next menu."
+			 << endl;
 
 		cin >> answer;
 
@@ -460,29 +458,38 @@ string courseName(int num)
 //					   stored within. It will also need the length of the array passed as well.
 //Postcondition:       This function will not return anything.
 //-------------------------------------------------------------------------------------------------
-void maxPerYear(const int list[][3], int numCourses)
+void maxPerYear(const int list [][3], int numCourses)
 {
 
-	/*int answer = 0;
-	int answerIndex = 0;
-	//int maxYearArray[][3];
-	int max = list
-	int newMax = list[0][2];
-	for (int i = 0; i < numCourses; i++)
+	int max2012 = list[0][2];
+	int index2012 = 0;
+	int max2013 = list[0][2];
+	int index2013 = 0;
+	for (int i = 0; i <numCourses;i++)
 	{
-	while(max[i][0] == 2012)
-	{
-	if (list[i][2] > max)
-	newMax = list[i][2];
+		if (list[i][2] > max2012 && list[i][0] == 2012)
+		{
+			max2012 = list[i][2];
+			index2012 = i;
+		}
+		if (list[i][2] > max2013 && list[i][0] == 2013)
+		{
+			max2013 = list[i][2];
+			index2013 = i;
+		}
 	}
-	while(max[i][0]==2013)
-	if (list[i][2] > max)
-	newMax = list[i][2];
+	cout << "The courses that had the MAXIMUM number of students for"
+			<< courseName(list[index2012][1])
+			<< "\n"<< "Max value for 2012 "<< max2012;
+		//while(max[i][0]==2013)
+			//if (list[i][2] > max)
+				//max2013 = list[i][2];
+	//The max number of students in 2013 in ENG 105 with 40 students
+	cout << "\nThe courses that had the MAXIMUM number of students for"
+			<< courseName(list[index2013][1])
+			<< "\n" << "Max value for 2012"<< max2013
+			<< endl;
 
-	}//end for loop
-	cout << "The courses that had the MAXIMUM number of students per year:"
-	<< endl;
-	*/
 	//cout << max;
 }//end maxPerYear function
 
@@ -494,19 +501,19 @@ void maxPerYear(const int list[][3], int numCourses)
 //-------------------------------------------------------------------------------------------------
 void printMaxYear(int list[][3], int answerIndex)
 {
-	// reverse logic of the minimum.
+// reverse logic of the minimum.
 	//int answer = list[][2]
 	//int answerIndex =0
 
 
 	cout << "In "
 		<< list[answerIndex][0]
-		<< " the max number of students is in "
-		<< courseName(list[answerIndex][1])
-		<< " with "
-		<< list[answerIndex][2]
-		<< " students"
-		<< endl;
+		 << " the max number of students is in "
+		 << courseName(list[answerIndex][1])
+		 << " with "
+		 << list[answerIndex][2]
+		 << " students"
+		 << endl;
 
 }//end printMaxYear function
 
@@ -521,7 +528,7 @@ void printMaxYear(int list[][3], int answerIndex)
 //								values stored within. It also will need the length of the array.
 //Postcondition:			    This function will not ouput anything.
 //-------------------------------------------------------------------------------------------------
-void minNumberOfStudents(const int list[][3], int numCourses)
+void minNumberOfStudents(const int list [][3], int numCourses)
 {
 
 	int answer = list[0][2];
@@ -543,13 +550,13 @@ void minNumberOfStudents(const int list[][3], int numCourses)
 	}//end for loop
 
 	cout << "The course with the MINIMUM number of students was in "
-		<< list[answerIndex][0]
-		<< " "
-		<< courseName(list[answerIndex][1])
-		<< " with "
-		<< list[answerIndex][2]
-		<< " students"
-		<< endl;
+		 << list[answerIndex][0]
+		 << " "
+		 << courseName(list[answerIndex][1])
+		 << " with "
+		 << list[answerIndex][2]
+		 << " students"
+		 << endl;
 
 }//end minNumberOfStudents function
 
@@ -562,7 +569,7 @@ void minNumberOfStudents(const int list[][3], int numCourses)
 //						 it.
 //Postcondition:		 This function will not output anything.
 //-------------------------------------------------------------------------------------------------
-void rangeOfYears(const int list[][3], int numCourses, int& low, int& high)
+void rangeOfYears(const int list [][3], int numCourses, int& low, int& high)
 {
 
 	low = list[0][0];
@@ -590,36 +597,37 @@ void rangeOfYears(const int list[][3], int numCourses, int& low, int& high)
 }//end rangeOfYears function
 
 
-void graph(const int list[][3], int numOfCourses, int numOfClass)
+void graph(const int list[][3],int numOfCourses, int numOfClass,string className)
 {
 
-	switch (numOfClass)
+	/*switch (numOfClass)
 	{
-	case 1: cout << "\n\t  __________________________________________________"
-		<< "\nCSC101" << "\n\t |" << "\n\t |" << "\n2012  \t |";
-		break;
-	case 2: cout << "\nMTH223" << "\n\t |" << "\n\t |" << "\n2012  \t |";
-		break;
-	case 3: cout << "\nENG105" << "\n\t |" << "\n\t |" << "\n2012  \t |";
-		break;
+	case 1 : cout << "\n\t  __________________________________________________"
+				  <<  "\nCSC101" <<"\n\t |" << "\n\t |" << "\n2012  \t |";
+				break;
+	case 2 : cout <<  "\nMTH223" <<"\n\t |" << "\n\t |" << "\n2012  \t |";
+				break;
+	case 3 : cout <<  "\nENG105" <<"\n\t |" << "\n\t |" <<  "\n2012  \t |";
+				break;
 	default:    break;
 	}
-
+*/
+	cout <<  className <<"\n\t |" << "\n\t |" << "\n2012  \t |";
 	int j = 0;
 
-	for (int i = 0; i <= numOfCourses; i++)
+	for (int i = 0;i <= numOfCourses; i++)
 	{
 		if ((list[i][1] == numOfClass) && (j < 1))
 		{
-			printAsterisks(list[i][2]);
-			cout << "\n\t | ";
-			j++;
+				printAsterisks(list[i][2]);
+				cout << "\n\t | ";
+				j++;
 		}
-		else if (list[i][1] == numOfClass)
+		else if(list[i][1] == numOfClass)
 		{
 			cout << "\n2013  \t |";
 			printAsterisks(list[i][2]);
-			cout << "\n\t |__________________________________________________" << endl;
+			cout <<"\n\t |__________________________________________________" << endl;
 
 			if (i = numOfCourses)
 			{
@@ -634,34 +642,34 @@ void graph(const int list[][3], int numOfCourses, int numOfClass)
 //Prints n asterisks to the screen .
 
 void printAsterisks(int n)
-{
+ {
 
-	for (int count = 1; count <= n; count++)
-		cout << "*";
+  for ( int count = 1; count <= n; count++)
+  cout << "*";
 
-}
-void totalPerCourse(const int list[][3], int numCourses, int numOfClass)
+ }
+void totalPerCourse(const int list[][3], int numCourses,int numOfClass)
 {
 	switch (numOfClass)
-	{
-	case 1: cout << "\nCSC101 has ";
-		break;
-	case 2: cout << "\nMTH223 has ";
-		break;
-	case 3: cout << "\nENG105 has ";
-		break;
-	default:    break;
-	}
+		{
+		case 1 : cout << "\nCSC101 had ";
+					break;
+		case 2 : cout <<  "\nMTH223 had ";
+					break;
+		case 3 : cout <<  "\nENG105 had ";
+					break;
+		default:    break;
+		}
 	int j = 0;
 	int total = 0;
 	int newTotal = 0;
-	for (int i = 0; i <= numCourses; i++)
-	{
-		if (list[i][1] == numOfClass)
+		for (int i = 0;i <= numCourses; i++)
 		{
-			total = (list[i][2]);
-			newTotal += total;
+			if (list[i][1] == numOfClass)
+			{
+					total =(list[i][2]);
+					newTotal+= total;
+			}
 		}
-	}
 	cout << newTotal << " students\n";
 }
